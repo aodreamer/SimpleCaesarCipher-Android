@@ -1,53 +1,92 @@
 package com.example.simplecesarcipher
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplecesarcipher.ui.theme.SimpleCesarCipherTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             SimpleCesarCipherTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ){WelcomeText("Welcome to My App","- Developer")}
+                    //...
+                ) {
+                    TipTimeScreen()
+                }
             }
         }
     }
 }
 
+@Preview
 @Composable
-fun WelcomeText(message: String, from: String){
-    Column{
+fun TipTimeScreen(){
+    var amountInput by remember {mutableStateOf("")}
+    val tip = calc(amountInput)
+    Column(
+        modifier = Modifier.padding(32.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ){
         Text(
-            text = message,
-            fontSize = 36.sp
+            text = stringResource(R.string.calculate_tip),
+            fontSize = 24.sp,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+        Spacer(Modifier.height(16.dp))
+        EditNumberField()
+        Spacer(Modifier.height(25.dp))
         Text(
-            text = from,
-            fontSize = 24.sp
+            text = stringResource(R.string.tip_amount,tip),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
         )
     }
+
+}
+
+@Composable
+fun EditNumberField(){
+    var amountInput by remember {mutableStateOf("")}
+    val tip = calc(amountInput)
+    TextField(
+        label = {Text("Input")},
+        singleLine = true,
+        modifier = Modifier.fillMaxWidth(),
+        value = amountInput,
+        onValueChange = {amountInput = it}
+    )
+}
+
+private fun calc(input: String): String {
+    val out = input
+    return out
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SimpleCaesarPreview() {
-    SimpleCesarCipherTheme {
-        WelcomeText("Welcome to My App","- Developer")
+fun DefaultPreview(){
+    SimpleCesarCipherTheme{
+        TipTimeScreen()
+
     }
 }
