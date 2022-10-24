@@ -52,7 +52,8 @@ fun TipTimeScreen(){
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(Modifier.height(16.dp))
-        EditNumberField()
+        EditNumberField(value = amountInput,
+            onValueChange = {amountInput = it} )
         Spacer(Modifier.height(25.dp))
         Text(
             text = stringResource(R.string.tip_amount,tip),
@@ -65,15 +66,15 @@ fun TipTimeScreen(){
 }
 
 @Composable
-fun EditNumberField(){
-    var amountInput by remember {mutableStateOf("")}
-    val tip = calc(amountInput)
+fun EditNumberField(value: String,
+                    onValueChange: (String) -> Unit){
+
     TextField(
-        label = {Text("Input")},
-        singleLine = true,
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(stringResource(R.string.cost_of_service)) },
         modifier = Modifier.fillMaxWidth(),
-        value = amountInput,
-        onValueChange = {amountInput = it}
+        singleLine = true,
     )
 }
 
