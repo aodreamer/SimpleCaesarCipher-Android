@@ -1,9 +1,6 @@
 <resources>
-    <string name="app_name">SimpleCesarCipher</string>
-    <string name="roll">Roll</string>
-    <string name="calculate_tip">Calculate Tip</string>
-    <string name="cost_of_service">Cost of Service</string>
-    <string name="how_was_the_service">Tip (%)</string>
-    <string name="round_up_tip">Round up tip?</string>
-    <string name="tip_amount">Tip Amount: %s</string>
+    <string name="app_name">SimpleBase64App</string>
+    <string name="Base64_App">Base64 App</string>
+    <string name="Input_Here">Input here</string>
+    <string name="Result">Your Base64: %s</string>
 </resources>
